@@ -26,3 +26,28 @@
 
 
 <a href="{% url 'blog:blog_pg' blog_id 0 %}">Go back to the blog.</a>
+
+
+
+
+
+{%  if post_list %}
+	<ul>
+	{% for post in post_list %}
+		<li><a href="{%  url 'blog:post_pg' post.id %}">{{ post.title }}</a></li>
+		<!-- out put tags -->
+		Tags:
+		{% for tag in post.tag_set.all %}
+			<a href="{% url 'blog:tag' tag.tag 0 %}">{{tag.tag}}</a> &bnsp;
+		{% endfor %}
+		<p>{{post.content|safe|slice:":500"}}</p>
+		<!-- output timestamps -->
+		Time created and modified:<br>
+		{% for time in post.timestamp_set.all %}
+			{{time.time_modified}} &bnsp;
+		{% endfor %}
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No posts are available.</p>
+{% endif %}

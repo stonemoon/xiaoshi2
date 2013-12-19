@@ -103,7 +103,7 @@ def blog_pg(request, blog_id, page_id):
 	post_list=blog.post_set.all()
 	num_post=post_list.count()
 	num_page=num_post/10
-	context={'num_page':num_page,'blog_id':blog_id,'blog_name':blog_name}
+	context={'num_page':num_page,'blog_id':blog_id,'blog_name':blog_name,'post_list':post_list}
 	return render(request, 'blog/blog_pg.html',context)
 
 def post_pg(request, post_id):

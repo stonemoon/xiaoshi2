@@ -1,12 +1,10 @@
-<h1>Test post_page html.</h1><br>
 <h2>{{post.title}}</h2><br>
 {% for tag in post.tag_set.all %}
-	<h4>{{tag.tag}}</h4> &bnsp;
+	<h4>{{tag.tag}}</h4>
 {% endfor %}
 <br>
 <p>{{post.content}}</p>
 <h4>Time created: {{post.created}}</h4><br>
-<h4>Time created:{{post.created}}</h4><br>
 {% for time in post.timestamp_set.all %}
 	<h4>{{time.time_modified}}</h4><br>
 {% endfor %}

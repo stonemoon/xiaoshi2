@@ -1,2 +1,12 @@
 <h1>{{blog_name}} </h1><br>
 <a href="{% url 'blog:add_post' blog_id %}">Add Post</a><br>
+{% for post in post_list %}
+<ul>
+	<li><a href="{% url 'blog:post_pg' post.id %}">{{post.title}}</a></li>
+	{% for tag in post.tag_set.all %}
+		{{tag.tag}},
+	{% endfor %}
+	<li>{{post.content}}</li>
+	<li>{{post.created}}</li>
+</ul>
+{% endfor %}
