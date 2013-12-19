@@ -1,0 +1,8 @@
+
+{% if msg == "Successful Login" %}
+	<h1>{{msg}}</h1><br>
+	<a href="{% url 'blog:blog_list' %}">Go To Your List Of Blogs</a><br>
+{% else %}
+	<h1>{{msg}}</h1>
+	<a href="{% url 'blog:login' %}">Go Back To Login</a><br>
+{% endif %}

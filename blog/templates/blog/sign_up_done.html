@@ -1,0 +1,9 @@
+{% if msg == "User Name Already Exists." %}
+	<h2>{{msg}}</h2><br>
+	<a href="{% url 'blog:sign_up' %}">Go Back To Sign Up</a><br>
+{% else %}
+	<h2>{{msg}}</h2><br>
+	<h2><a href="{% url 'blog:blog_list'%} ">Go To Your List Of Blogs</a><br></h2>
+{% endif %}
+
+

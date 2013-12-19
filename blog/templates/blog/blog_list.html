@@ -1,0 +1,12 @@
+<h1>This is {{usr_name}}'s list of blogs</h1><br> 
+<h3><a href="{% url 'blog:add_blog' %}">Add A Blog</a><br>
+{%  if blog_list %}
+<ul>
+{% for blog in blog_list %}
+	<li><a href="{%  url 'blog : blog_pg' blog.id 0 %}">{{ blog.name }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+	<p>No posts are available</p>
+{% endif %}
+<a href="{%url 'blog:index' %}">Go Back To The Main Page</a>

@@ -1,0 +1,8 @@
+<h2>Sign Up</h2>
+<form action="{% url 'blog:sign_up_done' %}" method="post">
+{% csrf_token %}
+Username: <input type="text" name="usr_name"></input><br><br>
+Password: <input type="password" name="password"></input><br><br>
+Blog Name: <input type="text" name="blog_name"></input><br><br>
+<input type="submit" value="Sign Up" />
+</form>
