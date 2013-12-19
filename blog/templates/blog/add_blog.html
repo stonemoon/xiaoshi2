@@ -1,6 +1,5 @@
 <h1>You Can Add A Blog Here.</h1><br>
-
-<form action="{% url 'blog:add_blog_done'%}" method="post">
+<form action="{% url 'blog:add_blog_done' %}" method="post">
 {% csrf_token %}
 Blog Name: <input type="text" name="blog_name"><br>
 <input type="submit" value="Submit" />

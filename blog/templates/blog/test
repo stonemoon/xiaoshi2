@@ -1,0 +1,28 @@
+<a href="{% url 'blog:add_post'  %}">Add Post</a><br>
+
+
+{% if use_id == blog.usr.id %}
+
+	<h1>You can add a new post here.</h1><br>
+
+	<form action="{% url 'blog:add_post_done' %}" method="post">
+	{% csrf_token %}
+	Title: <input type="text" name="title"><br>
+	Tag: <input type="text" name="tag"><br>
+	Content:  <texarea rows="20" cols="50" name="body" form="addpost"></texarea><br>
+	<input type="submit" value="Submit" />
+	</form>
+
+{% else %}
+	<h1>Sorry, you are not the owner of this blog.</h1><br>
+	<a href="{% url 'blog:blog_pg' blog_id 0 %}">Let's go back to the blog.</a>
+{% endif %}
+
+
+<h1>Post successfully submitted.</h1>
+<a href="{% url 'blog:blog_pg' blog_id 0 %}">Go back to the blog.</a>
+
+
+
+
+<a href="{% url 'blog:blog_pg' blog_id 0 %}">Go back to the blog.</a>

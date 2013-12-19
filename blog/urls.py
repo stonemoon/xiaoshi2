@@ -16,6 +16,9 @@ urlpatterns = patterns('',
     url(r'^add_blog_done/$','blog.views.add_blog_done',name='add_blog_done'),
     url(r'^login_first/$','blog.views.login_first',name='login_first'),
     url(r'^blog_pg/(?P<blog_id>\d+)/(?P<page_id>\d+)/$','blog.views.blog_pg',name='blog_pg'),
-    
+    url(r'^post_pg/$','blog.views.post_pg',name='post_pg'),
+    url(r'^tag/(?P<tag_id>\d+)/(?P<page_id>\d+)/$','blog.views.tag',name='tag'),
+    url(r'^add_post/(?P<blog_id>\d+)/$','blog.views.add_post',name='add_post'),
+    url(r'^add_post_done/(?P<blog_id>\d+)/$','blog.views.add_post_done',name='add_post_done'),
 
 )

@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 from blog.models import Blog, Post, Tag, Timestamp
-# from django.utils import timezone
+from django.utils import timezone
 # import re
 # from xml.sax.saxutils import unescape
 # from .forms import UploadFileForm
@@ -34,18 +34,18 @@ def logout_first(request):
 
 def sign_up_done(request):
 
-    usr_name = request.POST['usr_name']
+    user_name = request.POST['user_name']
     password = request.POST['password']
     blog_name = request.POST['blog_name']
     try:
-    	usr = User.objects.create_user(usr_name,password=password)
+    	usr = User.objects.create_user(user_name,password=password)
     except:
     	msg = "User Name Already Exists."
     	return render(request, 'blog/sign_up_done.html', {'msg':msg})
     else:
-    	usr=authenticate(username=usr_name,password=password)
-    	auth_login(request,usr)
-    	b=Blog(usr_name=usr_name,name=blog_name)
+    	user=authenticate(username=user_name,password=password)
+    	auth_login(request,user)
+    	b=Blog(usr=request.user,name=blog_name)
     	b.save()
     	msg = "Successfully Signed Up!"
     	return render(request, 'blog/sign_up_done.html', {'msg':msg})
@@ -93,14 +93,40 @@ def blog_list(request):
 	else:
 		blog_list = Blog.objects.filter(usr_id = user_id)
 		usr_name = request.user.username
-		return render(request, 'blog/blog_list.html', {'usr_name':usr_name,'blog_list':blog_list})
+		context={'usr_name':usr_name,'blog_list':blog_list}
+		return render(request, 'blog/blog_list.html', context)
 
-def blog_pg(request, blog_id, page_id)
+def blog_pg(request, blog_id, page_id):
 	username=request.user.username
-	blog=get_object_or_404(Blog,blog_id)
+	blog=get_object_or_404(Blog,pk=blog_id)
+	blog_name=blog.name
 	post_list=blog.post_set.all()
-	num=post_list.count
-	
+	num_post=post_list.count()
+	num_page=num_post/10
+	context={'num_page':num_page,'blog_id':blog_id,'blog_name':blog_name}
+	return render(request, 'blog/blog_pg.html',context)
 
+def post_pg(request, post_id):
+	post=get_object_or_404(Post,pk=post_id)
+	return render(request, 'blog/post_pg.html',{'post':post})
+
+def tag(request, tag_id, page_id):
+	return render(request, 'blog/tag.html')
+
+def add_post(request, blog_id):
+	user_id=request.user.id
+	blog=Blog.objects.get(id=blog_id)
+	content={'user_id':user_id,'blog':blog,'blog_id':blog_id}
+	return render(request, 'blog/add_post.html',content)
+
+def add_post_done(request, blog_id):
+	title=request.POST['title']
+	tag=request.POST['tag']
+	content=request.POST['body']
+	blog=get_object_or_404(Blog,pk=blog_id)
+	post=Post(blog=blog,title=title,content=content,created=timezone.now())
+	post.save()
+	context={'blog_id':blog_id,'blog':blog}
+	return render(request, 'blog/add_post_done.html',context)
 
 # Create your views here.

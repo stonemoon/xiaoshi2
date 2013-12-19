@@ -3,7 +3,7 @@
 {%  if blog_list %}
 <ul>
 {% for blog in blog_list %}
-	<li><a href="{%  url 'blog : blog_pg' blog.id 0 %}">{{ blog.name }}</a></li>
+	<li><a href="{%  url 'blog:blog_pg' blog.id 0 %}">{{ blog.name }}</a></li>
 {% endfor %}
 </ul>
 {% else %}
