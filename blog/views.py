@@ -38,7 +38,7 @@ def sign_up_done(request):
     password = request.POST['password']
     blog_name = request.POST['blog_name']
     try:
-    	user = User.objects.create_user(user_name,password=password)
+    	usr = User.objects.create_user(user_name,password=password)
     except:
     	msg = "User Name Already Exists."
     	return render(request, 'blog/sign_up_done.html', {'msg':msg})
