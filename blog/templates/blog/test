@@ -51,3 +51,17 @@
 {% else %}
 	<p>No posts are available.</p>
 {% endif %}
+
+
+
+{% for tag in post.tag_set.all %}
+	<h4>{{tag.tag}}</h4> &bnsp;
+{% endfor %}
+<br>
+<p>{{post.content}}</p>
+<h4>Time created: {{post.created}}</h4><br>
+<h4>Time created:{{post.created}}</h4><br>
+{% for time in post.timestamp_set.all %}
+	<h4>{{time.time_modified}}</h4><br>
+{% endfor %}
+<a href="{% url 'blog:blog_pg' post.blog.id 0 %}">Go back to the blog.</a>
